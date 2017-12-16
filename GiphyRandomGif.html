@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<!-- <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css" crossorigin="anonymous"> -->
+	<link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="container navbarplayground">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+<!--             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-3">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button> -->
+            <a class="navbar-brand" href="#">cAPI Paste</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navbar-collapse-3">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Works</a></li>
+                <li><a href="#">News</a></li>
+                <li><a href="#">Contact</a></li>
+<!--                 <li>
+                    <a class="btn btn-default btn-outline btn-circle collapsed" data-toggle="collapse" href="#nav-collapse3" aria-expanded="false" aria-controls="nav-collapse3">Search</a>
+                </li> -->
+            </ul>
+            <div class="collapse nav navbar-nav nav-collapse slide-down" id="nav-collapse3">
+                <form class="navbar-form navbar-right" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                </form>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+<div class="container info-container">
+	<div class="row remove-margin small-bottom-margin">
+		<img class="user-icon" id="user-icon-change" src="http://via.placeholder.com/350x150">
+		<h4><span id="pageTitle-change"></span><br><small><span id="APIType-change"></span> API Snippet by <a id="username-change" href="#" title="JonP Profile">JonP</a></small>
+        </h4>
+	</div>
+	<div id="append-tags" class="row remove-margin small-bottom-margin">
+<!-- 		<button class="tag">Giphy</button>
+		<button class="tag">Javascript</button>
+		<button class="tag">HTML</button>
+		<button class="tag">CSS</button> -->
+	</div>
+	<div class="row remove-margin">
+		<button id="preview-button" class="myButton">Preview</button>
+		<button id="html-button" class="myButton">HTML</button>
+		<button id="css-button" class="myButton">CSS</button>
+		<button id="js-button" class="myButton">JS</button>
+	</div>
+</div>
+
+
+<div class="container playground">
+
+<div class="website-preview-container">
+	<div id="website-preview">
+		<div id="randomGif"></div>
+	</div>
+</div>
+
+<div id="editor-html">&lt;div id=&quot;randomGif&quot;&gt;&lt;/div&gt;
+</div>
+
+<div id="editor-css">
+</div>
+
+<div id="editor-javascript">function getgifs(){&#10;$(&#39;#gifs&#39;).empty();&#10;offset = 0;&#10;var queryURL = &#39;https://api.giphy.com/v1/gifs/search?q=&#39;+custom+&#39;&amp;api_key=dc6zaTOxFJmzC&amp;MPAA=R&amp;limit=&#39;+imagecount+&#39;&amp;offset=&#39;+offset+&#39;&#39;&#10;$.ajax({&#10;&#9;    url: queryURL,&#10;&#9;    method: &quot;GET&quot;&#10;    }).done(function(response) {&#10;&#9;    console.log(response);&#10;&#9;    object = response;&#10;&#9;&#9;//If no results, show no result screen&#10;&#9;&#9;if(response.data.length&lt;1){&#10;&#9;&#9;&#9;return&#10;&#9;&#9;}&#10;&#9;&#9;//Append gifs to page&#10;&#9;&#9;else {&#10;&#10;&#9;&#9;    &#9;$(&#39;#randomGif&#39;).append(&#39;&lt;div&gt;&lt;img src=&quot;&#39;+response.data[randomGif].images.downsized.url+&#39;&quot;&gt;&lt;/div&gt;&#39;);&#10;&#9;&#9;}&#10;&#9;&#9;//End Append gifs to page&#10;&#9;});&#10;}&#10;//End AJAX and gif append&#10;&#10;getgifs();
+</div>
+
+</div>
+
+</body>
+
+<script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAoBqOGpNhrH9ba5arV455T2kzhsT3bZHw",
+    authDomain: "capi-paste.firebaseapp.com",
+    databaseURL: "https://capi-paste.firebaseio.com",
+    projectId: "capi-paste",
+    storageBucket: "capi-paste.appspot.com",
+    messagingSenderId: "1002672238599"
+  };
+  firebase.initializeApp(config);
+</script>
+
+<script src="ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+//Code for AJAX request and appending images
+custom = 'cats';
+imagecount = '100';
+randomGif = Math.floor(Math.random()*100);
+offset = '0';
+pageTitle = 'Giphy Random Cat Gif';
+APIType = 'Gyphy';
+tags = ['giphy', 'javascript', 'html', 'css', 'animated', 'gifs', 'ajax', 'poop'];
+submitter = 'JonP';
+
+
+dbUsers = firebase.database().ref('/userdata');
+// dbUsers.push();
+dbPages = firebase.database().ref('/pagedata');
+dbPages.push({pagename: pageTitle, tags: tags, submittedBy: submitter});
+
+dbUsers.on('child_added', snap=>{
+console.log(snap.val().username);
+	if(submitter == snap.val().username){
+		$('#user-icon-change').attr('src', snap.val().img);
+	}
+})
+
+function getgifs(){
+$('#gifs').empty();
+offset = 0;
+var queryURL = 'https://api.giphy.com/v1/gifs/search?q='+custom+'&api_key=dc6zaTOxFJmzC&MPAA=R&limit='+imagecount+'&offset='+offset+''
+$.ajax({
+	    url: queryURL,
+	    method: "GET"
+    }).done(function(response) {
+	    console.log(response);
+	    object = response;
+		//If no results, show no result screen
+		if(response.data.length<1){
+			return
+		}
+		//Append gifs to page
+		else {
+
+		    	$('#randomGif').append('<div><img src="'+response.data[randomGif].images.downsized.url+'"></div>');
+		}
+		//End Append gifs to page
+	});
+}
+//End AJAX and gif append
+
+getgifs();
+
+</script>
+<script src="script.js"></script>
+</html>
