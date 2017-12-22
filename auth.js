@@ -9,6 +9,8 @@
   };
   firebase.initializeApp(config);
 
+var database = firebase.database();
+
 var existingEmail = $("#email-text");
 var existingPassword = $("#password-text");
 var loginBtn = $("#submit-up");
@@ -31,6 +33,12 @@ $(loginBtn).on("click", function(){
 
 });
 
+
+var tempUser = {
+    "name": "",
+    "email": "",
+    "password": ""
+  };
 // New user signup function
 $(signupBtn).on("click", function(){
   event.preventDefault();
@@ -49,19 +57,41 @@ $(signupBtn).on("click", function(){
     "password": signupUserPassword
   }; 
 
-  var database = firebase.database();
+  dbUsers = firebase.database().ref('/userdata');
+  dbCurrentUser = firebase.database().ref('/userdata/' +signupUsersName);
 
-  database.ref("accounts").push({
-    newUserObject
+  dbUsers.once("value", snap=>{
+
+    tempUser = snap.val();
+
+    if (snap.hasChild(signupUsersName)){
+    // dbCurrentUser.set(newUserObject);
+    console.log("exists");
+  } else{
+    dbCurrentUser.set(newUserObject);
+  }
   });
 
+  // if (tempUser.name == signupUsersName || tempUser.email == signupUserEmail){
+  //   // dbCurrentUser.set(newUserObject);
+  //   console.log("exists");
+  // } else{
+  //   dbCurrentUser.set(newUserObject);
+  // }
 });
 
+function createdUser() {
+  var pullUserDetails = firebase.ref().child("name");
+
+  console.log(pullUserDetails);
+
+};
 
 
-
-
-
+// Is logged in true(boolean)
+// Propagate logged in user details to the navbar
+// Setup a user settings menu with log out working for now
+// username stored in firebase should "username"toLowercase();
 
 
 
