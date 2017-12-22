@@ -15,7 +15,7 @@ for(i=0; i<tags.length; i++){
 };
 
 
-$( document ).ready(function() {
+$(document).ready(function() {
 	$('#editor-html').hide();
 	$('#editor-css').hide();
 	$('#editor-javascript').hide();
