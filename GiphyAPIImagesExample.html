@@ -144,12 +144,13 @@ will display gifs of dogs instead. Similarly, you can change imagecount for more
 		<div id="similar4" class="col-xs-3">
 <!-- 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3 class="panel-title">Panel title</h3>
+					<h3 class="panel-title">Giphy API Example</h3>
 					</div>
 					<div class="panel-body">
-					Panel content
+					<img src="pageimages/GiphyAPIImagesExample.png">
+					<!-- <div>Panel content</div> -->
 				</div>
-			</div> -->
+			<!-- </div> -->
 		</div>				
 	</div>
 </div>
@@ -182,31 +183,59 @@ pageURL = 'GiphyAPIImagesExample.html';
 APIType = 'Gyphy';
 tags = ['giphy', 'javascript', 'html', 'css', 'animated', 'gifs', 'ajax', 'feces'];
 submitter = 'JonP';
+preview = 'pageimages/GiphyAPIImagesExample.png'
 
 dbUsers = firebase.database().ref('/userdata');
+dbCurrentUser = firebase.database().ref('/userdata/' +submitter);
 // dbUsers.push();
 dbPages = firebase.database().ref('/pagedata');
+dbCurrentPage = firebase.database().ref('/pagedata/' +pageTitle);
 
-dbPages.on('value', snap=>{
-	var tempArray = snap.val();
-	console.log(tempArray);
-	for(i=0; i<tempArray.length; i++){
-		if(tempArray[i].pagename == pageTitle){
-			console.log('same name');
-		}
-	}
-	// dbPages.push({pagename: pageTitle, tags: tags, submittedBy: submitter, url: pageURL});
+function newUser(){
+	dbCurrentUser.set({
+		"Name": submitter,
+		"Password": "poop",
+		"Avatar": "image.url"
+	})
+}
+newUser();
 
+dbUsers.on('value', snap=>{
+	console.log(snap.val());
 })
+
+function updatePage(){
+	dbCurrentPage.set({
+		Name: pageTitle,
+		URL: pageURL,
+		previewURL: preview,
+		API: APIType,
+		Tags: tags,
+		submittedBy: submitter
+	})
+}
+
+updatePage();
+
+// dbPages.on('value', snap=>{
+// 	var tempArray = snap.val();
+// 	console.log(tempArray);
+// 	for(i=0; i<tempArray.length; i++){
+// 		if(tempArray[i].pagename == pageTitle){
+// 			console.log('same name');
+// 		}
+// 	}
+// 	// dbPages.push({pagename: pageTitle, tags: tags, submittedBy: submitter, url: pageURL});
+
+// })
 
 appendNo = 1;
 
 dbPages.on('child_added', snap=>{
-
-	tempArray = snap.val().tags;
-	// console.log(tempArray);
-	if(tags[0] == tempArray[0] && appendNo < 5){
-		$('#similar'+appendNo).append('<a href="'+snap.val().url+'"><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">'+snap.val().pagename+'</h3></div><div class="panel-body">Panel content</div></div></a>');
+	// tempArray = snap.val();
+	console.log(snap.val());
+	if(tags[0] == snap.val().Tags[0] && appendNo < 5 && pageTitle != snap.val().Name){
+		$('#similar'+appendNo).append('<a href="'+snap.val().URL+'"><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">'+snap.val().Name+'</h3></div><div class="panel-body"><img src="'+snap.val().previewURL+'"></div></div></a>');
 		appendNo++;
 	}
 })
@@ -226,7 +255,7 @@ $.ajax({
 	    url: queryURL,
 	    method: "GET"
     }).done(function(response) {
-	    console.log(response);
+	    // console.log(response);
 	    object = response;
 		//If no results, show no result screen
 		if(response.data.length<1){
