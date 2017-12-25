@@ -10,11 +10,6 @@ var editorCSS = ace.edit("editor-css");
 editorCSS.setTheme("ace/theme/monokai");
 editorCSS.getSession().setMode("ace/mode/css");
 
-for(i=0; i<tags.length; i++){
-	$('#append-tags').append('<button class="tag">'+tags[i]+'</button>');
-};
-
-
 $(document).ready(function() {
 	$('#editor-html').hide();
 	$('#editor-css').hide();
@@ -27,7 +22,6 @@ $('#preview-button').click(function(){
 	$('#editor-css').hide();
 	$('#editor-javascript').hide();
 })
-
 
 $('#html-button').click(function(){
 	$('#website-preview').hide();
@@ -59,6 +53,9 @@ $('#js-button').click(function(){
     editorJS.getSession().setMode("ace/mode/javascript");
 })
 
+for(i=0; i<tags.length; i++){
+	$('#append-tags').append('<button class="tag">'+tags[i]+'</button>');
+};
 
 $('#pageTitle-change').text(pageTitle);
 $('#username-change').text(submitter);
