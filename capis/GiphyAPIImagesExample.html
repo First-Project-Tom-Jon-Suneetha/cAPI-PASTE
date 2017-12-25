@@ -4,7 +4,7 @@
 	<title></title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<!-- <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css" crossorigin="anonymous"> -->
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="/style.css">
 
 <style type="text/css">
 img {
@@ -18,44 +18,10 @@ img {
 
 <body>
 
-<nav class="navbar">
-    <div class="container navbarplayground">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-3">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">cAPI Paste</a>
-        </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="navbar-collapse-3">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Works</a></li>
-                <li><a href="#">News</a></li>
-                <li><a href="#">Contact</a></li>
-<!--                 <li>
-                    <a class="btn btn-default btn-outline btn-circle collapsed" data-toggle="collapse" href="#nav-collapse3" aria-expanded="false" aria-controls="nav-collapse3">Search</a>
-                </li> -->
-            </ul>
-            <div class="collapse nav navbar-nav nav-collapse slide-down" id="nav-collapse3">
-                <form class="navbar-form navbar-right" role="search">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search">
-                    </div>
-                    <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                </form>
-            </div>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
+<nav class="navbar" id="importHeader">
 </nav>
+
+<div class="wrapper" id="importInfoContainer">
 
 <div class="container info-container">
 	<div class="row remove-margin small-bottom-margin">
@@ -142,18 +108,24 @@ will display gifs of dogs instead. Similarly, you can change imagecount for more
 			</div> -->
 		</div>
 		<div id="similar4" class="col-xs-3">
-<!-- 			<div class="panel panel-default">
+			<!-- <div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">Giphy API Example</h3>
 					</div>
 					<div class="panel-body">
 					<img src="pageimages/GiphyAPIImagesExample.png">
-					<!-- <div>Panel content</div> -->
+					<div>Panel content</div>
 				</div>
-			<!-- </div> -->
+			</div> -->
 		</div>				
 	</div>
 </div>
+
+<div class="push"></div>
+</div>
+
+<footer id="importFooter" class="footer">
+</footer>
 
 </body>
 
@@ -170,9 +142,9 @@ will display gifs of dogs instead. Similarly, you can change imagecount for more
   };
   firebase.initializeApp(config);
 </script>
-
-<script src="ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/scripts/importheaderfooter.js"></script>
+<script src="/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
 //Code for AJAX request and appending images
 custom = 'cats';
@@ -181,13 +153,13 @@ offset = '0';
 pageTitle = 'Giphy API Example';
 pageURL = 'GiphyAPIImagesExample.html';
 APIType = 'Gyphy';
-tags = ['giphy', 'javascript', 'html', 'css', 'animated', 'gifs', 'ajax', 'feces'];
+tags = ['giphy', 'javascript', 'html', 'css', 'animated', 'gifs', 'ajax'];
 submitter = 'JonP';
-preview = 'pageimages/GiphyAPIImagesExample.png'
+preview = '/pageimages/GiphyAPIImagesExample.png'
 
 dbUsers = firebase.database().ref('/userdata');
 dbCurrentUser = firebase.database().ref('/userdata/' +submitter);
-// dbUsers.push();
+
 dbPages = firebase.database().ref('/pagedata');
 dbCurrentPage = firebase.database().ref('/pagedata/' +pageTitle);
 
@@ -216,18 +188,6 @@ function updatePage(){
 }
 
 updatePage();
-
-// dbPages.on('value', snap=>{
-// 	var tempArray = snap.val();
-// 	console.log(tempArray);
-// 	for(i=0; i<tempArray.length; i++){
-// 		if(tempArray[i].pagename == pageTitle){
-// 			console.log('same name');
-// 		}
-// 	}
-// 	// dbPages.push({pagename: pageTitle, tags: tags, submittedBy: submitter, url: pageURL});
-
-// })
 
 appendNo = 1;
 
@@ -314,5 +274,5 @@ var fadein = function(){
 $(document).on("mouseover", ".fadeinout", fadeout);
 $(document).on("mouseout", ".fadeinout", fadein);
 </script>
-<script src="script.js"></script>
+<script src="/scripts/capis.js"></script>
 </html>
