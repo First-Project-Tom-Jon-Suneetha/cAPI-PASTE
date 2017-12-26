@@ -3,6 +3,16 @@ html, body {
 	margin: 0;
 }
 
+#additional-instructions {
+	
+}
+
+.imgWidth {
+    width: 100%;
+    height: auto;
+    margin-bottom: 0px;
+}
+
 .wrapper {
 	min-height: 100%;
 	/* Equal to height of footer */
@@ -10,8 +20,7 @@ html, body {
 	margin-bottom: -50px;
 }
 
-.footer,
-.push {
+.footer{
 	height: 50px;
 }
 
@@ -62,10 +71,6 @@ h4 {
 	padding-left: 15px;
 	font-weight: 700;
 	float: left;
-}
-
-.gifContainer{
-	margin-bottom: 10px;
 }
 
 #editor, #editor-javascript, #editor-html, #editor-css { 
