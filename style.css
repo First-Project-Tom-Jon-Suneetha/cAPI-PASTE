@@ -37,6 +37,18 @@ nav {
 	background: #1A1F3E;
 }
 
+.navbar-toggle .icon-bar {
+	border: .5px solid #337ab7;
+}
+
+.navbar-toggle:active {
+	background-color: #337ab7;
+}
+
+.navbar-toggle {
+	border: 1px solid #337ab7;
+}
+
 h4 {
 	padding-left: 60px;
 	padding-top: 6px;
@@ -168,4 +180,20 @@ h4 {
 
 .similar-capis {
 	margin-bottom: 10px;
+}
+
+#capi-paste-logo {
+	height: 40px;
+	margin-top: -10px;
+	margin-right: 5px;
+	float: left;
+}
+
+a {
+	color: white;
+}
+
+#username-change {
+	color: #337ab7;
+};
 }
