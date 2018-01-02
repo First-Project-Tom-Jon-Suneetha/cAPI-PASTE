@@ -7,6 +7,10 @@ html, body {
 	
 }
 
+.additionallink {
+	color: blue;
+}
+
 .imgWidth {
     width: 100%;
     height: auto;
