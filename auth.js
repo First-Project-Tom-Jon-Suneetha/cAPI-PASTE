@@ -14,31 +14,33 @@ var database = firebase.database();
 var existingEmail = $("#email-text");
 var existingPassword = $("#password-text");
 var loginBtn = $("#submit-up");
+var loginError = $("#login-errors")
 
 var signupName = $("#user-name");
 var signupEmail = $("#signup-email");
 var signupPass = $("#signup-password");
 var signupBtn = $("#signup-submit");
 
-
-// Existing user login function
-$(loginBtn).on("click", function(){
-  event.preventDefault();
-
-	var existingUserEmail = existingEmail.val().trim();
-	var existingUserPassword = existingPassword.val().trim();
-
-  console.log(existingUserEmail);
-  console.log(existingUserPassword);  
-
-});
-
-
 var tempUser = {
     "name": "",
     "email": "",
     "password": ""
   };
+
+// Existing user login function
+$(loginBtn).on("click", function(){
+  event.preventDefault();
+
+    database.on("value", function(snapshot) {
+
+    if (snapshot.child('email') = existingEmail){
+      console.log("User already exists");
+    }
+
+  });  
+
+});
+
 // New user signup function
 $(signupBtn).on("click", function(){
   event.preventDefault();
@@ -66,18 +68,11 @@ $(signupBtn).on("click", function(){
 
     if (snap.hasChild(signupUsersName)){
     // dbCurrentUser.set(newUserObject);
-    console.log("exists");
+    console.log("already exists");
   } else{
     dbCurrentUser.set(newUserObject);
   }
   });
-
-  // if (tempUser.name == signupUsersName || tempUser.email == signupUserEmail){
-  //   // dbCurrentUser.set(newUserObject);
-  //   console.log("exists");
-  // } else{
-  //   dbCurrentUser.set(newUserObject);
-  // }
 });
 
 function createdUser() {
