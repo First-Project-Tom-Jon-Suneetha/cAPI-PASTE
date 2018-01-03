@@ -3,10 +3,6 @@ html, body {
 	margin: 0;
 }
 
-#additional-instructions {
-	
-}
-
 .additionallink {
 	color: blue;
 }
@@ -211,4 +207,8 @@ a {
 
 #username-change {
 	color: #337ab7;
+}
+
+#createaccounttext {
+	color: blue;
 }

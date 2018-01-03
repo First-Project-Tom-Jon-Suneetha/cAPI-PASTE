@@ -31,19 +31,28 @@ h1 {
 	height: 600px;
 }
 #importHeader {
-	position: fixed;
-	z-index: 999;
+/*	position: fixed;
+	z-index: 100;
 	top: 0px;
-	width: 100%;
+	width: 100%;*/
 }
+.modal-content {
+	z-index: 999;
+}
+.modal-backdrop {
+	z-index: 900;
+	/*background: transparent;*/
+}
+
 .bannerlogo {
 /*	margin-left: 35%;
 	width: 30%;
 	margin-top: -20px;*/
 	width: 100%;
 }
+
 .bannertoptext {
-	margin-top: 50px;
+	margin-top: 0px;
 	padding-top: 10px;
 	text-align: center;
 }
@@ -171,14 +180,30 @@ dbPages.on('child_added', snap=>{
 	}
 })
 
+var spin = false
 $('.bannerlogo').click(function(){
-	$('body').css({"background-image":"url('images/wp1.jpg')",
-	"background-repeat":"no-repeat",
-	"background-attachment":"fixed",
-	"background-size":"cover",
-	"font-family":"CatCafe"
-	});
-	$('.bannerlogo').addClass('animated infinite rotate360')
+	if(!spin){
+		spin = true;
+		$('body').css({"background-image":"url('images/wp1.jpg')",
+		"background-repeat":"no-repeat",
+		"background-attachment":"fixed",
+		"background-size":"cover",
+		"font-family":"CatCafe"
+		});
+		$('.bannerlogo').addClass('animated infinite rotate360');
+	}
+	else{
+		spin = false;
+		$('body').css({"background-image":"none",
+		"background-repeat":"",
+		"background-attachment":"",
+		"background-size":"",
+		"font-family":"",
+		"background-color":"#D6E3F2"
+		});
+		$('.bannerlogo').removeClass('animated infinite rotate360');
+	}
+	
 })
 
 
