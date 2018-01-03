@@ -7,11 +7,24 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link rel="stylesheet" type="text/css" href="animate.css">
 <style type="text/css">
-.indexbackground {
-/*	background-image: url("../images/plagiariasm-kebox2.jpg");
+
+@font-face {
+    font-family: CatCafe;
+    src: url(fonts/CatCafe.ttf);
+}
+
+/*body {
+	background-image: url("images/wp2.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-size: cover;*/
+    background-size: cover;
+    font-family: CatCafe;
+}*/
+
+h1 {
+	color: #1A1F3E;
+   -webkit-text-stroke-width: 1px;
+   -webkit-text-stroke-color: #1A1F3E;
 }
 
 .pushindex {
@@ -24,34 +37,49 @@
 	width: 100%;
 }
 .bannerlogo {
-	margin-left: 35%;
+/*	margin-left: 35%;
 	width: 30%;
-	margin-top: -20px;
+	margin-top: -20px;*/
+	width: 100%;
 }
 .bannertoptext {
-	margin-top: 60px;
+	margin-top: 50px;
+	padding-top: 10px;
 	text-align: center;
 }
 .bannerbottomtext {
 	text-align: center;
-
 }
-
+/*.container, .panelplayground, .row, div, body, h3, html, .remove-margin, .similar-capis, .col-xs-3 {
+	background: transparent;
+	background-color: transparent;
+	backface-visibility: none;
+}*/
 </style>
 
 </head>
 
-<body class="indexbackground">
+<body>
 
 <nav class="navbar" id="importHeader"></nav>
 
 <div class="main-banner">
-	<h1 class="bannertoptext">Learning API's is hard!</h1>
-	<img class="bannerlogo animated infinite rotate360" src="images/capipastelogoblue.gif">
-	<h1 class="bannerbottomtext">That's why cAPIbara is here!</h1>
+	<h1 class="bannertoptext">^ Learning API's is hard... ^</h1>
+	<div class="row">
+		<div class="col-xs-4">
+			<img class="bannerlogo" src="images/capipastelogoblue.gif">	
+		</div>
+		<div class="col-xs-4">
+			<img class="bannerlogo" src="images/capipastelogoblue.gif">
+		</div>
+		<div class="col-xs-4">
+			<img class="bannerlogo" src="images/capipastelogoblue.gif">	
+		</div>
+	</div>
+	<h1 class="bannerbottomtext">^ That's why cAPIbara is here! ^</h1>
 </div>
 
-<div class="container panelplayground ">
+<div class="container panelplayground">
 	<h3 class="remove-margin similar-capis">Feature cAPIs:</h3>
 	<div class="row">
 		<div id="featured1" class="col-xs-3"></div>
@@ -107,9 +135,6 @@
 <script src="ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
 
-$('.homeURL').attr('href', 'index.html');
-$('#capi-paste-logo').attr('src', 'images/capipastelogo.gif');
-
 dbUsers = firebase.database().ref('/userdata');
 dbPages = firebase.database().ref('/pagedata');
 
@@ -146,7 +171,27 @@ dbPages.on('child_added', snap=>{
 	}
 })
 
+$('.bannerlogo').click(function(){
+	$('body').css({"background-image":"url('images/wp2.jpg')",
+	"background-repeat":"no-repeat",
+	"background-attachment":"fixed",
+	"background-size":"cover",
+	"font-family":"CatCafe"
+	});
+	$('.bannerlogo').addClass('animated infinite rotate360')
+})
+
+
 </script>
+<style type="text/css">
+/*body {
+	background-image: url("images/wp2.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    font-family: CatCafe;
+}*/
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="auth.js"></script>
