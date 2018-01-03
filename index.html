@@ -107,8 +107,10 @@
 <script src="ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
 
-dbUsers = firebase.database().ref('/userdata');
+$('.homeURL').attr('href', 'index.html');
+$('#capi-paste-logo').attr('src', 'images/capipastelogo.gif');
 
+dbUsers = firebase.database().ref('/userdata');
 dbPages = firebase.database().ref('/pagedata');
 
 appendNo = 1;
