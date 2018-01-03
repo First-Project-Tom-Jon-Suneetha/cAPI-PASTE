@@ -154,7 +154,7 @@ h4 {
 }
 .myButton:hover {
 	background: #262F73;
-	background-color:#262F73;
+	background-color: #262F73;
 }
 .myButton:active {
 	position:relative;
@@ -197,7 +197,18 @@ a {
 	color: white;
 }
 
+.login-button {
+	color: white;
+	border: none;
+	background-color: transparent;
+	height: 100%;	
+	padding: 0px;
+}
+
+.login-button:hover {
+	color: #212B5A;
+}
+
 #username-change {
 	color: #337ab7;
-};
 }
