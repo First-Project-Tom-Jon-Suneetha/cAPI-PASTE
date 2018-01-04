@@ -118,6 +118,16 @@ h1 {
 	</div>
 </div>
 
+<div class="container panelplayground ">
+	<h3 class="remove-margin similar-capis">Youtube cAPIs:</h3>
+	<div class="row">
+		<div id="youtube1" class="col-xs-3"></div>
+		<div id="youtube2" class="col-xs-3"></div>
+		<div id="youtube3" class="col-xs-3"></div>
+		<div id="youtube4" class="col-xs-3"></div>				
+	</div>
+</div>
+
 <div class="push"></div>
 
 <footer id="importFooter" class="footer"></footer>
@@ -177,6 +187,17 @@ dbPages.on('child_added', snap=>{
 		var previewURL = snap.val().previewURL.slice(1);
 		$('#giphy'+giphyNo).append('<a href="capis/'+snap.val().URL+'"><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">'+snap.val().Name+'</h3></div><div class="panel-body"><img class="imgWidth" src="'+previewURL+'"></div></div></a>');
 		giphyNo++;
+	}
+})
+
+youtubeNo = 1;
+dbPages.on('child_added', snap=>{
+	// tempArray = snap.val();
+	console.log(snap.val());
+	if(snap.val().API == 'Youtube Data API v3' && youtubeNo < 5){
+		var previewURL = snap.val().previewURL.slice(1);
+		$('#youtube'+youtubeNo).append('<a href="capis/'+snap.val().URL+'"><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">'+snap.val().Name+'</h3></div><div class="panel-body"><img class="imgWidth" src="'+previewURL+'"></div></div></a>');
+		youtubeNo++;
 	}
 })
 
