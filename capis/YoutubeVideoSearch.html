@@ -117,7 +117,8 @@ pageURL = 'YoutubeVideoSearch.html';
 APIType = 'Youtube Data API v3';
 tags = ['Youtube', 'data api', 'video', 'html', 'css', 'javascript'];
 submitter = 'JonP';
-preview = '/pageimages/YoutubeVideoSearch.png'
+preview = '/pageimages/YoutubeVideoSearch.png';
+// apiKey = 'AIzaSyC--CEK0kKhGRihm9BRqcy4mW5UeV_Nk3w';
 
 dbUsers = firebase.database().ref('/userdata');
 dbCurrentUser = firebase.database().ref('/userdata/' +submitter);
@@ -145,11 +146,11 @@ function updatePage(){
         previewURL: preview,
         API: APIType,
         Tags: tags,
-        submittedBy: submitter
+        submittedBy: submitter,
+        APIKey: apiKey
     })
 }
-
-updatePage();
+// updatePage();
 
 appendNo = 1;
 
@@ -181,10 +182,10 @@ $('#submitSearchInput').click(function(){
   event.preventDefault();
   $('#videos').empty();
   searchQuery = $('#searchInput').val()
-  getVideos(searchQuery);
+  getVideos(searchQuery, APIKey);
 })
 
-function getVideos(searchQuery){
+function getVideos(searchQuery, APIKey){
   $.get(
     "https://www.googleapis.com/youtube/v3/search",{
       part:'snippet',
@@ -210,35 +211,12 @@ function getVideos(searchQuery){
   );
 }
 
-getVideos(searchQuery);
+getVideos(searchQuery, APIKey);
 
-// function getVids(pID){
-// $.get(
-//   "https://www.googleapis.com/youtube/v3/playlistItems",{
-//     part:'snippet',
-//     maxResults: maximumResults,
-//     playlistId: pID,
-//     key: APIKey
-//   },
-//   function(data){
-//     if(data.items.length>0){
-//       var output;
-//       $.each(data.items, function(i, item){
-//         console.log(item);
-//         videoTitle = item.snippet.title;
-//         console.log(videoTitle);
-        // videoID = item.id.videoId;
-        // output = '<li><iframe height="'+videoHeight+'" width="'+videoWidth+'" src=\"//www.youtube.com/embed/'+videoID+'\"></iframe></li>'
-        // $('#videos').append(output);
-//       })
-//     }
-//     else{
-//       var output = '<li>'+channelName+' has no public videos</li>'
-//         $('#videos').append(output);
-//     }
-//   }
-// );
-// }
+// dbCurrentPage.on('value', snap=>{
+//   var APIKey = snap.val().APIKey;
+//   getVideos(searchQuery, APIKey);
+// });
 
 </script>
 
