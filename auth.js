@@ -34,7 +34,7 @@ $(loginBtn).on("click", function(){
     database.on("value", function(snapshot) {
 
     if (snapshot.child('email') = existingEmail){
-      console.log("User already exists");
+      
     }
 
   });  
@@ -68,11 +68,14 @@ $(signupBtn).on("click", function(){
 
     if (snap.hasChild(signupUsersName)){
     // dbCurrentUser.set(newUserObject);
-    console.log("already exists");
+    $("#user-exists-prompt").append("User already exists");
   } else{
     dbCurrentUser.set(newUserObject);
   }
   });
+
+
+
 });
 
 function createdUser() {
