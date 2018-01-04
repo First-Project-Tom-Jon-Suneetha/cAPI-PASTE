@@ -102,7 +102,7 @@ html, body {
 
     <div id="editor-css">#right-panel {&#10;    font-family: &#39;Roboto&#39;,&#39;sans-serif&#39;;&#10;    line-height: 30px;&#10;    padding-left: 10px;&#10;}&#10;&#10;#right-panel select, #right-panel input {&#10;   font-size: 15px;&#10;}&#10;&#10;#right-panel select {&#10;   width: 100%;&#10;}&#10;&#10;#right-panel i {&#10;  font-size: 12px;&#10;}&#10;html, body {&#10;  height: 100%;&#10;}&#10;#map {&#10;    height: 100%;&#10;    float: left;&#10;    width: 63%;&#10;    height: 100%;&#10;}&#10;#right-panel {&#10;    float: right;&#10;    width: 34%;&#10;    height: 100%;&#10;    overflow: auto;&#10;}&#10;.panel {&#10;    height: 100%;&#10;    overflow: auto;&#10;}&#10;#startDirections {&#10;    margin-top: 20px;&#10;    padding: 5px;&#10;    border-radius: 5px;&#10;}</div>
 
-    <div id="editor-javascript">  var businessInfo = {coord:{lat: 39.527446, lng: -104.983576}}&#10;  function startDirections() {&#10;    if (navigator.geolocation) {&#10;        navigator.geolocation.getCurrentPosition(function(position) {&#10;          var pos = {&#10;            lat: position.coords.latitude,&#10;            lng: position.coords.longitude&#10;          }&#10;          $(&#39;#right-panel&#39;).empty();&#10;          $(&#39;#right-panel&#39;).append(&#39;&lt;p id=&quot;total-distance-style&quot;&gt;Total Distance: &lt;span id=&quot;total&quot;&gt;&lt;/span&gt;&lt;/p&gt;&#39;);&#10;          initMap(pos)&#10;        })&#10;    }&#10;  }&#10;  function initMap(position) {&#10;&#10;    var map = new google.maps.Map(document.getElementById(&#39;map&#39;), {&#10;      zoom: 14,&#10;      center: businessInfo.coord&#10;    });&#10;&#10;    var marker = new google.maps.Marker({&#10;      position: businessInfo.coord,&#10;      map:map&#10;    })&#10;&#10;    var directionsService = new google.maps.DirectionsService;&#10;    var directionsDisplay = new google.maps.DirectionsRenderer({&#10;      draggable: true,&#10;      map: map,&#10;      panel: document.getElementById(&#39;right-panel&#39;)&#10;    });&#10;&#10;    directionsDisplay.addListener(&#39;directions_changed&#39;, function() {&#10;      computeTotalDistance(directionsDisplay.getDirections());&#10;    });&#10;    if(position){&#10;    displayRoute(position, businessInfo.coord,directionsService,&#10;        directionsDisplay);&#10;    }&#10;  }&#10;&#10;  function displayRoute(origin, destination, service, display) {&#10;    service.route({&#10;      origin: origin,&#10;      destination: destination,&#10;&#10;      travelMode: &#39;DRIVING&#39;,&#10;      avoidTolls: true&#10;    }, function(response, status) {&#10;      if (status === &#39;OK&#39;) {&#10;        display.setDirections(response);&#10;      } else {&#10;        alert(&#39;Could not display directions due to: &#39; + status);&#10;      }&#10;    });&#10;  }&#10;&#10;  function computeTotalDistance(result) {&#10;    var total = 0;&#10;    var myroute = result.routes[0];&#10;    for (var i = 0; i &lt; myroute.legs.length; i++) {&#10;      total += myroute.legs[i].distance.value;&#10;    }&#10;    total = total / 1000;&#10;    document.getElementById(&#39;total&#39;).innerHTML = total + &#39; km&#39;;&#10;  }</div>
+    <div id="editor-javascript">//Change the lat and lng here to set the destination&#10;var businessInfo = {coord:{lat: 37.872373, lng: -122.259055}}&#10;&#10;function startDirections() {&#10;  //Geolocation is used to get your current location to provide directions from where you are&#10;  if (navigator.geolocation) {&#10;      navigator.geolocation.getCurrentPosition(function(position) {&#10;        var pos = {&#10;          lat: position.coords.latitude,&#10;          lng: position.coords.longitude&#10;        }&#10;        $(&#39;#right-panel&#39;).empty();&#10;        $(&#39;#right-panel&#39;).append(&#39;&lt;p id=&quot;total-distance-style&quot;&gt;Total Distance: &lt;span id=&quot;total&quot;&gt;&lt;/span&gt;&lt;/p&gt;&#39;);&#10;        initMap(pos)&#10;      })&#10;  }&#10;}&#10;&#10;//Draws the map&#10;function initMap(position) {&#10;  var map = new google.maps.Map(document.getElementById(&#39;map&#39;), {&#10;    zoom: 14,&#10;    center: businessInfo.coord&#10;  });&#10;  //Places a marker at your business&#39;s location&#10;  var marker = new google.maps.Marker({&#10;    position: businessInfo.coord,&#10;    map:map&#10;  })&#10;&#10;  var directionsService = new google.maps.DirectionsService;&#10;  var directionsDisplay = new google.maps.DirectionsRenderer({&#10;    draggable: true,&#10;    map: map,&#10;    panel: document.getElementById(&#39;right-panel&#39;)&#10;  });&#10;&#10;  //Recalculates route if you dragged stuff&#10;  directionsDisplay.addListener(&#39;directions_changed&#39;, function() {&#10;    computeTotalDistance(directionsDisplay.getDirections());&#10;  });&#10;  if(position){&#10;  displayRoute(position, businessInfo.coord,directionsService,&#10;      directionsDisplay);&#10;  }&#10;}&#10;&#10;function displayRoute(origin, destination, service, display) {&#10;  service.route({&#10;    origin: origin,&#10;    destination: destination,&#10;&#10;    travelMode: &#39;DRIVING&#39;,&#10;    avoidTolls: true&#10;  }, function(response, status) {&#10;    if (status === &#39;OK&#39;) {&#10;      display.setDirections(response);&#10;    } else {&#10;      alert(&#39;Could not display directions due to: &#39; + status);&#10;    }&#10;  });&#10;}&#10;&#10;function computeTotalDistance(result) {&#10;  var total = 0;&#10;  var myroute = result.routes[0];&#10;  for (var i = 0; i &lt; myroute.legs.length; i++) {&#10;    total += myroute.legs[i].distance.value;&#10;  }&#10;  total = total / 1000;&#10;  document.getElementById(&#39;total&#39;).innerHTML = total + &#39; km&#39;;&#10;}</div>
 
 </div>
 
@@ -112,7 +112,7 @@ html, body {
     <br>
     After you get your API Key, insert it into the INSERT YOUR API KEY in the html section
     <br>
-    You can adjust the lat and lng in the javascript to set the map starting location and markers. Please refer to this <a href="https://support.google.com/maps/answer/18539?co=GENIE.Platform%3DDesktop&hl=en" target="_blank" class="additionallink">link</a> for instructions on how to get the lat and lng you need.
+    You'll want to change the businessInfo coordinates in the javascript file to set the destination. Please refer to this <a href="https://support.google.com/maps/answer/18539?co=GENIE.Platform%3DDesktop&hl=en" target="_blank" class="additionallink">link</a> for instructions on how to get the lat and lng you need.
     </p>
 </div>
 
@@ -208,73 +208,78 @@ dbUsers.on('child_added', snap=>{
 </script>
 <!-- Page Specific JS -->
 <script>
-  var businessInfo = {coord:{lat: 39.527446, lng: -104.983576}}
-  function startDirections() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-          var pos = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          }
-          $('#right-panel').empty();
-          $('#right-panel').append('<p id="total-distance-style">Total Distance: <span id="total"></span></p>');
-          initMap(pos)
-        })
+//Change the lat and lng here to set the destination
+var businessInfo = {coord:{lat: 37.872373, lng: -122.259055}}
+
+function startDirections() {
+  //Geolocation is used to get your current location to provide directions from where you are
+  if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        }
+        $('#right-panel').empty();
+        $('#right-panel').append('<p id="total-distance-style">Total Distance: <span id="total"></span></p>');
+        initMap(pos)
+      })
+  }
+}
+
+//Draws the map
+function initMap(position) {
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 14,
+    center: businessInfo.coord
+  });
+  //Places a marker at your business's location
+  var marker = new google.maps.Marker({
+    position: businessInfo.coord,
+    map:map
+  })
+
+  var directionsService = new google.maps.DirectionsService;
+  var directionsDisplay = new google.maps.DirectionsRenderer({
+    draggable: true,
+    map: map,
+    panel: document.getElementById('right-panel')
+  });
+
+  //Recalculates route if you dragged stuff
+  directionsDisplay.addListener('directions_changed', function() {
+    computeTotalDistance(directionsDisplay.getDirections());
+  });
+  if(position){
+  displayRoute(position, businessInfo.coord,directionsService,
+      directionsDisplay);
+  }
+}
+
+function displayRoute(origin, destination, service, display) {
+  service.route({
+    origin: origin,
+    destination: destination,
+
+    travelMode: 'DRIVING',
+    avoidTolls: true
+  }, function(response, status) {
+    if (status === 'OK') {
+      display.setDirections(response);
+    } else {
+      alert('Could not display directions due to: ' + status);
     }
+  });
+}
+
+function computeTotalDistance(result) {
+  var total = 0;
+  var myroute = result.routes[0];
+  for (var i = 0; i < myroute.legs.length; i++) {
+    total += myroute.legs[i].distance.value;
   }
-  function initMap(position) {
-
-    var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 14,
-      center: businessInfo.coord
-    });
-
-    var marker = new google.maps.Marker({
-      position: businessInfo.coord,
-      map:map
-    })
-
-    var directionsService = new google.maps.DirectionsService;
-    var directionsDisplay = new google.maps.DirectionsRenderer({
-      draggable: true,
-      map: map,
-      panel: document.getElementById('right-panel')
-    });
-
-    directionsDisplay.addListener('directions_changed', function() {
-      computeTotalDistance(directionsDisplay.getDirections());
-    });
-    if(position){
-    displayRoute(position, businessInfo.coord,directionsService,
-        directionsDisplay);
-    }
-  }
-
-  function displayRoute(origin, destination, service, display) {
-    service.route({
-      origin: origin,
-      destination: destination,
-
-      travelMode: 'DRIVING',
-      avoidTolls: true
-    }, function(response, status) {
-      if (status === 'OK') {
-        display.setDirections(response);
-      } else {
-        alert('Could not display directions due to: ' + status);
-      }
-    });
-  }
-
-  function computeTotalDistance(result) {
-    var total = 0;
-    var myroute = result.routes[0];
-    for (var i = 0; i < myroute.legs.length; i++) {
-      total += myroute.legs[i].distance.value;
-    }
-    total = total / 1000;
-    document.getElementById('total').innerHTML = total + ' km';
-  }
+  total = total / 1000;
+  document.getElementById('total').innerHTML = total + ' km';
+}
 </script>
 <!-- Put this at the end of your HTML file. Also, you will need your own API Key to replace YOUR_API_KEY -->
 <script async defer
