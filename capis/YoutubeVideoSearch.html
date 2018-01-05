@@ -176,13 +176,19 @@ var searchQuery = 'Cute Kittens';
 var maximumResults = 10;
 var videoWidth =  480;
 var videoHeight = videoWidth*3/4;
-// var APIKey = 'AIzaSyC--CEK0kKhGRihm9BRqcy4mW5UeV_Nk3w'
 
 $('#submitSearchInput').click(function(){
   event.preventDefault();
   $('#videos').empty();
   searchQuery = $('#searchInput').val()
-  getVideos(searchQuery, APIKey);
+  dbCurrentPage.once('value').then(snap=>{
+    var APIKey = snap.val().APIKey;
+    getVideos(searchQuery, APIKey);
+    return APIKey;
+  }).then(function(results){
+  }, function(error) {
+    console.error(error)
+  })
 })
 
 function getVideos(searchQuery, APIKey){
@@ -223,32 +229,10 @@ dbCurrentPage.once('value').then(snap=>{
   getVideos(searchQuery, APIKey);
   return APIKey;
 }).then(function(results){
-  console.log(results);
+  console.log('successful promise!');
 }, function(error) {
   console.error(error)
 })
-
-// function getAPIKey() {
-//   return new Promise(function(resolve, reject){
-//     dbCurrentPage.once('value', snap=>{
-//       var APIKey = snap.val().APIKey;
-//       console.log('APIKey ' +APIKey);
-//     })
-//     if(APIKey) {
-//       resolve(APIKey);
-//     }
-//     else {
-//       reject(APIKey)
-//     }
-//   })
-// }
-
-// getAPIKey().then(result=>{
-//   getVideos(searchQuery, result);
-//   console.log('Promise Success!');
-// }).catch(function(error) {
-//   console.log('Promise Error: '+error);
-// })
 
 </script>
 
