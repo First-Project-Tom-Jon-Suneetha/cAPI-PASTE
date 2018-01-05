@@ -1,14 +1,3 @@
-
-  var config = {
-    apiKey: "AIzaSyBKaHNKheNbN0NmjSzaqs9GBhEu14bXiC0",
-    authDomain: "capi-paste-9e165.firebaseapp.com",
-    databaseURL: "https://capi-paste-9e165.firebaseio.com",
-    projectId: "capi-paste-9e165",
-    storageBucket: "capi-paste-9e165.appspot.com",
-    messagingSenderId: "846503561187"
-  };
-  firebase.initializeApp(config);
-
 var database = firebase.database();
 
 var existingEmail = $("#email-text");

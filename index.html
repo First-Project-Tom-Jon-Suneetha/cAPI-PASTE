@@ -76,13 +76,13 @@ h1 {
 	<h1 class="bannertoptext">^ Learning API's is hard... ^</h1>
 	<div class="row">
 		<div class="col-xs-4">
-			<img class="bannerlogo" src="images/capipastelogoblue.gif">	
+			<img class="bannerlogo bannerlogo1" src="images/capipastelogoblue.gif">	
 		</div>
 		<div class="col-xs-4">
-			<img class="bannerlogo" src="images/capipastelogoblue.gif">
+			<img class="bannerlogo bannerlogo2" src="images/capipastelogoblue.gif">
 		</div>
 		<div class="col-xs-4">
-			<img class="bannerlogo" src="images/capipastelogoblue.gif">	
+			<img class="bannerlogo bannerlogo3" src="images/capipastelogoblue.gif">	
 		</div>
 	</div>
 	<h1 class="bannerbottomtext">^ That's why kAPIbara-san is here! ^</h1>
@@ -212,7 +212,9 @@ $('.bannerlogo').click(function(){
 		"background-size":"cover",
 		"font-family":"CatCafe"
 		});
-		$('.bannerlogo').addClass('animated infinite rotate360');
+		$('.bannerlogo2').addClass('animated infinite rotate360');
+		$('.bannerlogo1').addClass('animated infinite rubberBand');
+		$('.bannerlogo3').addClass('animated infinite swing');
 	}
 	else{
 		spin = false;
@@ -223,7 +225,7 @@ $('.bannerlogo').click(function(){
 		"font-family":"",
 		"background-color":"#D6E3F2"
 		});
-		$('.bannerlogo').removeClass('animated infinite rotate360');
+		$('.bannerlogo').removeClass('animated infinite rotate360 swing rubberBand');
 	}
 })
 
