@@ -47,25 +47,25 @@
 
     <div class="website-preview-container">
         <div id="website-preview">
-            <form>
-                Search Youtube: 
-                <br>
-                <input type="text" id="searchInput" value="Cute Kittens">
-                <br>
-                <input type="submit" id="submitSearchInput" value="Submit">
-            </form>
-            <div>
-                <ul id="videos" style="list-style: none; padding-left: 0;">
-                </ul>
-            </div>
+<form>
+    Search Youtube: 
+    <br>
+    <input type="text" id="searchInput" value="Cute Kittens">
+    <br>
+    <input type="submit" id="submitSearchInput" value="Submit">
+</form>
+<div>
+    <ul id="videos" style="list-style: none; padding-left: 0;">
+    </ul>
+</div>
         </div>
     </div>
 
-    <div id="editor-html"></div>
+    <div id="editor-html">&lt;form&gt;&#10;    Search Youtube: &#10;    &lt;br&gt;&#10;    &lt;input type=&quot;text&quot; id=&quot;searchInput&quot; value=&quot;Cute Kittens&quot;&gt;&#10;    &lt;br&gt;&#10;    &lt;input type=&quot;submit&quot; id=&quot;submitSearchInput&quot; value=&quot;Submit&quot;&gt;&#10;&lt;/form&gt;&#10;&lt;div&gt;&#10;    &lt;ul id=&quot;videos&quot; style=&quot;list-style: none; padding-left: 0;&quot;&gt;&#10;    &lt;/ul&gt;&#10;&lt;/div&gt;</div>
 
     <div id="editor-css"></div>
 
-    <div id="editor-javascript"></div>
+    <div id="editor-javascript">var searchQuery = &#39;Cute Kittens&#39;;&#10;var maximumResults = 10;&#10;var videoWidth =  480;&#10;var videoHeight = videoWidth*3/4;&#10;// var APIKey = &#39;AIzaSyC--CEK0kKhGRihm9BRqcy4mW5UeV_Nk3w&#39;&#10;&#10;$(&#39;#submitSearchInput&#39;).click(function(){&#10;  event.preventDefault();&#10;  $(&#39;#videos&#39;).empty();&#10;  searchQuery = $(&#39;#searchInput&#39;).val()&#10;  getVideos(searchQuery, APIKey);&#10;})&#10;&#10;function getVideos(searchQuery, APIKey){&#10;  $.get(&#10;    &quot;https://www.googleapis.com/youtube/v3/search&quot;,{&#10;      part:&#39;snippet&#39;,&#10;      type: &#39;video&#39;,&#10;      maxResults: maximumResults,&#10;      q: searchQuery,&#10;      key: APIKey&#10;    },&#10;    function(data){&#10;      console.log(data);&#10;      if(data.items.length&gt;0){&#10;        $.each(data.items, function(i, item){&#10;          videoID = item.id.videoId;&#10;          output = &#39;&lt;li&gt;&lt;iframe height=&quot;&#39;+videoHeight+&#39;&quot; width=&quot;&#39;+videoWidth+&#39;&quot; src=\&quot;//www.youtube.com/embed/&#39;+videoID+&#39;\&quot;&gt;&lt;/iframe&gt;&lt;/li&gt;&#39;&#10;          $(&#39;#videos&#39;).append(output);&#10;        })&#10;      }&#10;      else{&#10;        var output = &#39;&lt;li&gt;&#39;+searchQuery+&#39; returned no results&lt;/li&gt;&#39;&#10;        $(&#39;#videos&#39;).append(output);&#10;      }&#10;    }&#10;  );&#10;}&#10;&#10;getVideos(searchQuery, APIKey);</div>
 
 </div>
 
@@ -176,7 +176,7 @@ var searchQuery = 'Cute Kittens';
 var maximumResults = 10;
 var videoWidth =  480;
 var videoHeight = videoWidth*3/4;
-var APIKey = 'AIzaSyC--CEK0kKhGRihm9BRqcy4mW5UeV_Nk3w'
+// var APIKey = 'AIzaSyC--CEK0kKhGRihm9BRqcy4mW5UeV_Nk3w'
 
 $('#submitSearchInput').click(function(){
   event.preventDefault();
@@ -211,12 +211,44 @@ function getVideos(searchQuery, APIKey){
   );
 }
 
-getVideos(searchQuery, APIKey);
+// getVideos(searchQuery, APIKey);
 
-// dbCurrentPage.on('value', snap=>{
+// dbCurrentPage.once('value', snap=>{
 //   var APIKey = snap.val().APIKey;
 //   getVideos(searchQuery, APIKey);
 // });
+
+dbCurrentPage.once('value').then(snap=>{
+  var APIKey = snap.val().APIKey;
+  getVideos(searchQuery, APIKey);
+  return APIKey;
+}).then(function(results){
+  console.log(results);
+}, function(error) {
+  console.error(error)
+})
+
+// function getAPIKey() {
+//   return new Promise(function(resolve, reject){
+//     dbCurrentPage.once('value', snap=>{
+//       var APIKey = snap.val().APIKey;
+//       console.log('APIKey ' +APIKey);
+//     })
+//     if(APIKey) {
+//       resolve(APIKey);
+//     }
+//     else {
+//       reject(APIKey)
+//     }
+//   })
+// }
+
+// getAPIKey().then(result=>{
+//   getVideos(searchQuery, result);
+//   console.log('Promise Success!');
+// }).catch(function(error) {
+//   console.log('Promise Error: '+error);
+// })
 
 </script>
 
