@@ -20,7 +20,7 @@
    <h3>CONTACT</h3>
   </div>
   </div>
-<form class="form-horizontal" action="mailto:capipasteinfo.com" method="post">
+<form class="form-horizontal" action="">
   <div class="row" id="contact-body">
   <fieldset>
     <div class="form-group">
@@ -65,101 +65,4 @@
 
 
 </body>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-<script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyAoBqOGpNhrH9ba5arV455T2kzhsT3bZHw",
-    authDomain: "capi-paste.firebaseapp.com",
-    databaseURL: "https://capi-paste.firebaseio.com",
-    projectId: "capi-paste",
-    storageBucket: "capi-paste.appspot.com",
-    messagingSenderId: "1002672238599"
-  };
-  firebase.initializeApp(config);
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="scripts/importheaderfootermaster.js"></script>
-<script src="ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript">
-
-dbUsers = firebase.database().ref('/userdata');
-dbPages = firebase.database().ref('/pagedata');
-
-appendNo = 1;
-dbPages.on('child_added', snap=>{
-	// tempArray = snap.val();
-	console.log(snap.val());
-	if(appendNo < 5){
-		var previewURL = snap.val().previewURL.slice(1);
-		$('#featured'+appendNo).append('<a href="capis/'+snap.val().URL+'"><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">'+snap.val().Name+'</h3></div><div class="panel-body"><img class="imgWidth" src="'+previewURL+'"></div></div></a>');
-		appendNo++;
-	}
-})
-
-googlemapsNo = 1;
-dbPages.on('child_added', snap=>{
-	// tempArray = snap.val();
-	console.log(snap.val());
-	if(snap.val().API == 'Google Maps' && googlemapsNo < 5){
-		var previewURL = snap.val().previewURL.slice(1);
-		$('#googlemaps'+googlemapsNo).append('<a href="capis/'+snap.val().URL+'"><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">'+snap.val().Name+'</h3></div><div class="panel-body"><img class="imgWidth" src="'+previewURL+'"></div></div></a>');
-		googlemapsNo++;
-	}
-})
-
-giphyNo = 1;
-dbPages.on('child_added', snap=>{
-	// tempArray = snap.val();
-	console.log(snap.val());
-	if(snap.val().API == 'Gyphy' && giphyNo < 5){
-		var previewURL = snap.val().previewURL.slice(1);
-		$('#giphy'+giphyNo).append('<a href="capis/'+snap.val().URL+'"><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">'+snap.val().Name+'</h3></div><div class="panel-body"><img class="imgWidth" src="'+previewURL+'"></div></div></a>');
-		giphyNo++;
-	}
-})
-
-var spin = false
-$('.bannerlogo').click(function(){
-	if(!spin){
-		spin = true;
-		$('body').css({"background-image":"url('images/wp1.jpg')",
-		"background-repeat":"no-repeat",
-		"background-attachment":"fixed",
-		"background-size":"cover",
-		"font-family":"CatCafe"
-		});
-		$('.bannerlogo').addClass('animated infinite rotate360');
-	}
-	else{
-		spin = false;
-		$('body').css({"background-image":"none",
-		"background-repeat":"",
-		"background-attachment":"",
-		"background-size":"",
-		"font-family":"",
-		"background-color":"#D6E3F2"
-		});
-		$('.bannerlogo').removeClass('animated infinite rotate360');
-	}
-	
-})
-
-
-</script>
-<style type="text/css">
-/*body {
-	background-image: url("images/wp2.jpg");
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    font-family: CatCafe;
-}*/
-</style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="auth.js"></script>
-</html>
+	</html>
